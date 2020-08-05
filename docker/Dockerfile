@@ -556,7 +556,7 @@ RUN wget https://github.com/Kitware/CMake/archive/v${CMAKE_VERSION}.tar.gz -O - 
     make -j $(nproc) && \
     make install
 
-ARG DLDT_VER=2020.2
+ARG DLDT_VER=2020.4
 ARG DLDT_REPO=https://github.com/opencv/dldt.git
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
