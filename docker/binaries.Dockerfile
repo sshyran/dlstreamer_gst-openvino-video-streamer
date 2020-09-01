@@ -596,9 +596,9 @@ WORKDIR /root
 
 # Prerequisites
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y -q --no-install-recommends \
-    libusb-1.0-0-dev libboost-all-dev libgtk2.0-dev python-yaml \
+    libusb-1.0-0-dev libboost-all-dev libgtk2.0-dev lsb-release python-yaml \
     \
-    clinfo libboost-all-dev libjson-c-dev \
+    clinfo opencl-headers ocl-icd-libopencl1 libnuma1 libboost-all-dev libjson-c-dev \
     build-essential cmake ocl-icd-opencl-dev wget gcovr vim git gdb ca-certificates libssl-dev uuid-dev \
     libgirepository1.0-dev \
     python3-dev python3-wheel python3-pip python3-setuptools python-gi-dev python-yaml \
@@ -622,7 +622,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y -q --no-
     libva-dev libxrandr-dev libudev-dev \
     \
     && rm -rf /var/lib/apt/lists/* \
-    && python3.6 -m pip install numpy opencv-python pytest
+    && python3.6 -m pip install numpy==1.19.1 opencv-python==4.2.0.34 pytest==6.0.1
 
 # Install
 COPY --from=dldt-build /home/build /
@@ -671,7 +671,6 @@ RUN mkdir -p gst-video-analytics/build \
         -DCMAKE_INSTALL_PREFIX=/usr \
         -DVERSION_PATCH=${SOURCE_REV} \
         -DGIT_INFO=${GIT_INFO} \
-        -DBUILD_SHARED_LIBS=ON \
         -DENABLE_PAHO_INSTALLATION=${ENABLE_PAHO_INSTALLATION} \
         -DENABLE_RDKAFKA_INSTALLATION=${ENABLE_RDKAFKA_INSTALLATION} \
         -DHAVE_VAAPI=ON \
